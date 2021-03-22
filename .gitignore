@@ -1,8 +1,0 @@
-.env
-.env.example
-.gitignore
-/node_modules
-.vscode
-package-lock.json
-package.json
-tsconfig.json
