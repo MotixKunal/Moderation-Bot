@@ -11,7 +11,7 @@ export default class KickModule extends Module {
     async kick(msg: Message, user: GuildMember) {
         if (msg.channel.type === "dm" || msg.guild === null) return msg.channel.send("This command is server only!");
 
-        if (!msg.member?.hasPermission("MANAGE_MESSAGES")) return msg.channel.send("You are missing permission: `Manage_Messages`");
+        if (!msg.member?.hasPermission("KICK_MEMBERS")) return msg.channel.send("You are missing permission: `kick members`");
         if (!msg.guild.me?.hasPermission("KICK_MEMBERS")) return msg.channel.send("Iam missing permission: `kick members`");
         if (user.hasPermission("KICK_MEMBERS")) return msg.channel.send("This user is mod/admin, you cannot kick them").then(msg => msg.delete({ timeout: 5000 }));
         
