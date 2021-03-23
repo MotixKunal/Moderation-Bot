@@ -1,4 +1,4 @@
-import { GuildMember, Message, MessageEmbed } from "discord.js";
+import { Message, MessageEmbed } from "discord.js";
 import { command, default as CookiecordClient, Module } from "cookiecord";
 import * as axios from 'axios';
 import helpinterface from "../../interfaces/helpinterface";
@@ -23,7 +23,7 @@ export default class MemeCommand extends Module {
                     .setColor('#7CFC00')
 
                 msg.channel.send(embed);
-            })
+            }) 
     }
 }
 

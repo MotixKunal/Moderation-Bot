@@ -9,11 +9,14 @@ export default class Client extends CookiecordClient {
         });
     };
 
-    start(Token: string): void {
+    start(Token: string, paths?: string[]): void {
         this.login(Token);
         this.on("ready", () => console.log(`Logged in as ${this.user?.tag}`));
-        this.loadModulesFromFolder("src/modules/fun");
-        this.loadModulesFromFolder("src/modules/moderation");
+        
+        paths?.forEach(path => {
+            this.loadModulesFromFolder(path);
+        })
+        
         this.registerModule(HelpModule);
     }
 }
