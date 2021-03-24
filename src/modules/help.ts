@@ -28,6 +28,19 @@ function getFunCmds(): Array<string> {
     return commands;
 }
 
+function getUtilCmds(): Array<string> {
+    let commands: Array<string> = [];
+    let commandFiles = readdirSync(__dirname + '\\utility').filter(file => file.endsWith('.ts' || '.js'));
+
+    for (let file of commandFiles) {
+        let newFile = require('./utility/' + file);
+
+        newFile.help?.category.toLowerCase() === 'utility' ? commands.push(`-${newFile.help.commandName}\n`) : console.log('not utility 😳')
+    }
+
+    return commands;
+}
+
 export default class HelpModule extends Module {
     constructor(client: CookiecordClient) {
         super(client);
@@ -45,7 +58,8 @@ export default class HelpModule extends Module {
                 .setColor("#7CFC00")
                 .addFields(
                     {name: 'Moderation', value: '```\n' +  getModerationCmds().join('') + '```', inline: true},
-                    {name: 'Fun', value: '```\n' + getFunCmds().join('') + '```', inline: true}
+                    {name: 'Fun', value: '```\n' + getFunCmds().join('') + '```', inline: true},
+                    {name: 'Utility', value: '```\n' + getUtilCmds().join('') + '```', inline: true}
                 );
 
             return msg.channel.send(embed);

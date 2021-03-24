@@ -1,4 +1,4 @@
-type categorys = 'Fun' | 'Moderation';
+type categorys = 'Fun' | 'Moderation' | 'utility'
 
 export default interface help {
     commandName: string;
