@@ -14,29 +14,14 @@ export default class KickModule extends Module {
         if (!msg.member?.hasPermission("KICK_MEMBERS")) return msg.channel.send("You are missing permission: `kick members`");
         if (!msg.guild.me?.hasPermission("KICK_MEMBERS")) return msg.channel.send("Iam missing permission: `kick members`");
         if (user.hasPermission("KICK_MEMBERS")) return msg.channel.send("This user is mod/admin, you cannot kick them").then(msg => msg.delete({ timeout: 5000 }));
-        
-        let embed = new MessageEmbed()
-            .setTitle('`🥾` Kick')
-            .setDescription(`Are you sure you would like to kick ${user}? React with \`❗\` to confirm.`)
-            .setColor('#7CFC00')
-            .setFooter('You have 5 seconds to react.');
 
-        msg.channel.send(embed).then(message => {
-            message.react('❗').then(() => {
-                message.awaitReactions((reaction, user) => ['❗'].includes(reaction.emoji.name) && user.id === message.author.id, { max: 1, time: 5000})
-                    .then(collected => {
-                        message.delete();
+        user.kick().then(() => {
+            let embed = new MessageEmbed()
+                .setTitle(`\`✅\` Succesfully Kicked ${user.user.tag}`)
+                .setColor('#7CFC00')
 
-                        user.kick().then(() => {
-                            let embed = new MessageEmbed()
-                                .setTitle(`\`✅\` Succesfully Kicked ${user.user.tag}`)
-                                .setColor('#7CFC00')
-
-                            msg.channel.send(embed).then(msg2 => msg2.delete({ timeout: 5000 }));
-                        }).catch(err => msg.channel.send('failed to kick user:\n' + err));
-                    }).catch(console.log)
-            })
-        })
+            msg.channel.send(embed).then(msg2 => msg2.delete({ timeout: 5000 }));
+        }).catch(err => msg.channel.send('failed to kick user:\n' + err));
     }
 }
 

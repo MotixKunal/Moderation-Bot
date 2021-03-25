@@ -2,5 +2,6 @@
     "typescript.tsdk": "node_modules/typescript/lib",
     "editor.fontSize": 18,
     "editor.formatOnSave": true,
-    "editor.formatOnPaste": true
+    "editor.formatOnPaste": true,
+    "compile-hero.disable-compile-files-on-did-save-code": false
 }
