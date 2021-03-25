@@ -21,7 +21,6 @@ export default class BanModule extends  Module {
         reason.shift();
         reason.shift();
 
-        //todo: make reason var and make it = to the args after user
         user.ban({reason: reason.join(' ')})
             .then(() => {
                 let embed: MessageEmbed = new MessageEmbed()
